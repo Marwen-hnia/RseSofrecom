@@ -1,0 +1,646 @@
+{% extends "layouts/base.html" %}
+
+
+{% block title %} Profile {% endblock %} 
+
+<!-- Element injected in the BODY element -->
+{% block body_class %} sidebar-mini {% endblock body_class %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+
+  <!-- Google Font: Source Sans Pro -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="/static/assets/plugins/fontawesome-free/css/all.min.css">
+  <!-- Theme style -->
+
+  <link rel="stylesheet" href="/static/assets/css/adminlte.min.css">
+  <link rel="stylesheet" href="/static/assets/css/sof_users_profile2.css">
+  <link rel="stylesheet" href="/static/assets/plugins/bootstrap/bootstrap-datepicker1.css">
+<link rel="stylesheet" href="/static/assets/css/yearpicker1.css">
+
+  <script src="https://kit.fontawesome.com/15974d1e86.js" crossorigin="anonymous"></script>
+
+{% endblock stylesheets %}
+
+{% block content %}  
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>Profil</h1>
+          </div>
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Accueil</a></li>
+              <li class="breadcrumb-item active">Profil</li>
+            </ol>
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-md-3">
+
+            <!-- Profile Image -->
+            <div class="card card-primary card-outline">
+              <div class="card-body box-profile">
+                <div class="text-center">
+                  <img class="profile-user-img img-fluid img-circle"
+                       src="/static/assets/img/user4-128x128.jpg"
+                       alt="User profile picture">
+                </div>
+
+                <h3 class="profile-username text-center">
+                  {{ user.nom_emp}}
+                </h3>
+
+                <p class="text-muted text-center">
+                  {{ user.mail }}
+                </p>
+
+                <ul class="list-group list-group-unbordered mb-3 cmptDiv">
+
+                </ul>
+
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+             <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Expérience</h3>
+              </div>
+
+              <div class="card-body ">
+                    <div class="col-sm-12">
+                   <div class="row">
+                       <div class="col-sm-8">
+                     <strong><i class="fas fa-book mr-1"></i> Poste</strong>
+                       </div>
+                     <div class="col-sm-4">
+                     <strong id="int-temps"><i class="fas fa-clock mr-1 "></i> Periode</strong>
+                     </div>
+                       </div>
+                   </div>
+                <div class="col-sm-12">
+                    {% for pos in post%}
+
+                <div class="row">
+                     <div class="col-sm-8">
+                  <p class="text-muted">
+                    {{pos.exp}}
+                   </p>
+                     </div>
+
+                  <div class="col-sm-4">
+                    <p  class="text-muted ">{{pos.date}}-{{pos.fin}}</p>
+                  </div>
+                  </div>
+                    <hr>
+
+                    {%endfor%}
+                </div>
+
+
+
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- About Me Box -->
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">A Propos</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <strong><i class="fas fa-book mr-1"></i> Formation</strong>
+
+                <p class="text-muted">
+                  {{user.formation}}
+                </p>
+
+                <hr>
+
+                <strong><i class="fas fa-map-marker-alt mr-1"></i> Adresse Résidence</strong>
+
+                <p class="text-muted">{{user.adresse_residence}}</p>
+
+                <hr>
+                <strong><i class="fas fa-map-marker-alt mr-1"></i> Adresse Domicile</strong>
+
+                <p class="text-muted">{{user.adresse_domicile}}</p>
+                <hr>
+                <strong><i class="fas fa-birthday-cake mr-1"></i> Date De Naissance</strong>
+                <p class="text-muted">{{user.date_de_naissance}}</p>
+
+
+
+
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <div class="card card-primary">
+              <div class="card-header">
+                <h3 class="card-title">Contact</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <strong><i class="fas fa-phone mr-1"></i> Téléphone Professionnel</strong>
+
+                <p class="text-muted">
+                  {{user.Telephone_professionnel}}
+                </p>
+
+                <hr>
+
+                <strong><i class="fas fa-phone mr-1"></i> Téléphone Personnel</strong>
+
+                <p class="text-muted">{{user.Telephone_personnel}}</p>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+          <div class="col-md-9">
+            <div class="card">
+              <div class="card-header p-2">
+                <ul class="nav nav-pills">
+                  <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Publications</a></li>
+                  <li class="nav-item"><a class="nav-link"  href="#timeline" data-toggle="tab">Information du compte</a></li>
+                  <li class="nav-item"><a class="nav-link"  href="#settings" data-toggle="tab">Parametre</a></li>
+                </ul>
+              </div><!-- /.card-header -->
+              <div class="card-body">
+                <div class="tab-content">
+                  <div class="active tab-pane" id="activity">
+                    <!-- Post -->
+                    <div class="post">
+                      <div class="user-block">
+                        <img class="img-circle img-bordered-sm" src="/static/assets/img/user1-128x128.jpg" alt="user image">
+                        <span class="username">
+                          <a href="#">{{user.nom_emp}}</a>
+                          <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
+                        </span>
+                        <span class="description">Shared publicly - 7:30 PM today</span>
+                      </div>
+                      <!-- /.user-block -->
+                      <p>
+                        Lorem ipsum represents a long-held tradition for designers,
+                        typographers and the like. Some people hate it and argue for
+                        its demise, but others ignore the hate as they create awesome
+                        tools to help create filler text for everyone from bacon lovers
+                        to Charlie Sheen fans.
+                      </p>
+
+                      <p>
+                        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a>
+                        <a href="#" class="link-black text-sm"><i class="far fa-thumbs-up mr-1"></i> Like</a>
+                        <span class="float-right">
+                          <a href="#" class="link-black text-sm">
+                            <i class="far fa-comments mr-1"></i> Comments (5)
+                          </a>
+                        </span>
+                      </p>
+
+                      <input class="form-control form-control-sm" type="text" placeholder="Type a comment">
+                    </div>
+                    <!-- /.post -->
+
+                    <!-- Post -->
+
+                    <!-- /.post -->
+
+                    <!-- Post -->
+                    <div class="post">
+                      <div class="user-block">
+                        <img class="img-circle img-bordered-sm" src="/static/assets/img/user6-128x128.jpg" alt="User Image">
+                        <span class="username">
+                          <a href="#">Adam Jones</a>
+                          <a href="#" class="float-right btn-tool"><i class="fas fa-times"></i></a>
+                        </span>
+                        <span class="description">Posted 5 photos - 5 days ago</span>
+                      </div>
+                      <!-- /.user-block -->
+                      <div class="row mb-3">
+                        <div class="col-sm-6">
+                          <img class="img-fluid" src="/static/assets/img/photo1.png" alt="Photo">
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-6">
+                          <div class="row">
+                            <div class="col-sm-6">
+                              <img class="img-fluid mb-3" src="/static/assets/img/photo2.png" alt="Photo">
+                              <img class="img-fluid" src="/static/assets/img/photo3.jpg" alt="Photo">
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-sm-6">
+                              <img class="img-fluid mb-3" src="/static/assets/img/photo4.jpg" alt="Photo">
+                              <img class="img-fluid" src="/static/assets/img/photo1.png" alt="Photo">
+                            </div>
+                            <!-- /.col -->
+                          </div>
+                          <!-- /.row -->
+                        </div>
+                        <!-- /.col -->
+                      </div>
+                      <!-- /.row -->
+
+                      <p>
+                        <a href="#" class="link-black text-sm mr-2"><i class="fas fa-share mr-1"></i> Share</a>
+                        <a href="#" class="link-black text-sm"><i class="far fa-thumbs-up mr-1"></i> Like</a>
+                        <span class="float-right">
+                          <a href="#" class="link-black text-sm">
+                            <i class="far fa-comments mr-1"></i> Comments (5)
+                          </a>
+                        </span>
+                      </p>
+
+                      <input class="form-control form-control-sm" type="text" placeholder="Type a comment">
+                    </div>
+                    <!-- /.post -->
+                  </div>
+                  <!-- /.tab-pane -->
+                  <div class="tab-pane" id="timeline">
+                    <!-- The timeline -->
+                    <div class="col-12">
+
+
+                  <div class="table-responsive">
+                    <table class="table">
+                      <tr>
+                        <th style="width:50%">Matricule STN :</th>
+                        <td>{{user.mat_emp}}</td>
+
+                      </tr>
+                      <tr>
+                        <th>CUID :</th>
+                        <td>{{user.cuid_emp}}</td>
+                      </tr>
+                      <tr>
+                        <th>Nom & prénom :</th>
+                        <td>{{user.nom_emp}}</td>
+                      </tr>
+                      <tr>
+                        <th>Département :</th>
+                        <td>{{user.nom_dept}}</td>
+                      </tr>
+                      <tr>
+                        <th>Manager :</th>
+                        <td>{{user.nom_resp}}</td>
+                      </tr>
+                      <tr>
+                        <th>Direction :</th>
+                        <td>{{user.name_bu}}</td>
+                      </tr>
+                      <tr>
+                        <th>Directeur :</th>
+                        <td>{{user.resp_bu}}</td>
+                      </tr>
+
+                    </table>
+                  </div>
+                </div>
+                    <div class="row no-print">
+                <div class="col-12">
+                  <button type="button" class="btn btn-danger float-right"><i class="fas fa-exclamation-triangle"></i>
+                    Reclamer
+                  </button>
+
+                </div>
+              </div>
+                  </div>
+
+
+                  <!-- /.tab-pane -->
+
+                  <div class="tab-pane" id="settings">
+                    <form class="form-horizontal" method="post">
+                        {%csrf_token%}
+                   <div class="step active">
+                      <div class="form-group row">
+                        <label for="inputName" class="col-sm-2 col-form-label">Adresse résidence</label>
+
+                        <div class="col-sm-10">
+                          <div class="input-group" >
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </span>
+                              </div>
+                          <input type="text" name="Adresse_résidence" class="form-control" id="inputName" placeholder="Adresse résidence">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="inputEmail" class="col-sm-2 col-form-label">Adresse domicile</label>
+                        <div class="col-sm-10">
+                          <div class="input-group" >
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                </span>
+                              </div>
+                          <input type="text" name="Adresse_domicile" class="form-control" id="inputEmail" placeholder="Adresse domicile">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="inputName2" class="col-sm-2 col-form-label">Téléphone professionnel</label>
+                        <div class="col-sm-10">
+                          <div class="input-group" >
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fas fa-phone-alt"></i>
+                                </span>
+                              </div>
+                          <input type="text" name="Telephone_professionnel" class="form-control" id="inputName2" placeholder="Téléphone professionnel">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="inputExperience" class="col-sm-2 col-form-label">Téléphone personnel</label>
+                        <div class="col-sm-10">
+                          <div class="input-group" >
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fas fa-phone-alt"></i>
+                                </span>
+                              </div>
+                          <input type="text" name="Téléphone_personnel" class="form-control" id="inputExperience" placeholder="Téléphone personnel">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="reservation" class="col-sm-2 col-form-label">Date de naissance</label>
+                        <div class="col-sm-10">
+                          <div class="input-group" >
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="far fa-calendar-alt"></i>
+                                </span>
+                              </div>
+                                 <input type="text" name="Date_de_naissance" class="form-control datepicker" data-provider="datepicker" id="reservation" placeholder="Date de naissance">
+
+                          </div>
+
+
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="inputlinkedin" class="col-sm-2 col-form-label">LinkedIn</label>
+                        <div class="col-sm-10">
+                          <div class="input-group" >
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fab fa-linkedin"></i>
+                                </span>
+                              </div>
+                          <input type="text" name="LinkedIn" class="form-control" id="inputlinkedin" placeholder="LinkedIn">
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <div class="offset-sm-2 col-sm-10">
+                          <button type="button" id="next-btn" class="btn btn-danger ">Suivant</button>
+                        </div>
+                      </div>
+                   </div>
+                   <div class="step ">
+                      <div class="form-group row">
+                        <label  class="col-sm-2 col-form-label">Expérience</label>
+                        <div class="col-sm-10" id="allexp">
+                          <div class="row">
+                           <div class="col-sm-5">
+                             <div class="input-group" >
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fas fa-building"></i>
+                                </span>
+                              </div>
+                           <input type="text" name="poste[]" placeholder="Poste"  class="form-control" id="poste">
+                             </div>
+                           </div>
+                          <label for="deDate"  class="col-sm-1 col-form-label ">De</label>
+                          <div class="form-group col-md-2 " >
+                               <input type="text" name="datede[]" placeholder="Date"  class="form-control yearpicker1" id="deDate">
+
+                            </div>
+
+                          <label for="aDate"  class="col-sm-1 col-form-label ">A</label>
+                          <div class="form-group col-md-2 " >
+                               <input type="text" name="adate[]" placeholder="Date"  class="form-control yearpicker" id="aDate">
+
+                            </div>
+                           <div class="form-group col-md-1  " id="input-exp" >
+                             <i class="fas fa-plus form-control" id="addFieldexp" ></i></div>
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="inputFormation" class="col-sm-2 col-form-label">Formation</label>
+                        <div class="col-sm-10">
+                          <div class="input-group" >
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fas fa-tasks"></i>
+                                </span>
+                              </div>
+                          <select name="formation" id="inputFormation" class="form-control">
+                            {% for c in formation %}
+                              <option>{{c}}</option>
+                            {% endfor %}
+                          </select>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="inputCertification" class="col-sm-2 col-form-label">Certification</label>
+                        <div class="col-sm-10">
+                          <div class="input-group" >
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fas fa-certificate"></i>
+                                </span>
+                              </div>
+                          <input type="text" class="form-control" id="inputCertification" placeholder="Certification">
+                          </div>
+                          </div>
+                      </div>
+                      <div class="form-group row" >
+                        <label for="skills" class="col-sm-2 col-form-label">Compétences</label>
+                        <div class="col-sm-10" id="allskill">
+                          <div class="row">
+                           <div class="col-sm-7">
+                             <div class="input-group" >
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fas fa-cogs"></i>
+                                </span>
+                              </div>
+                           <select type="text" name="competences[]"  class="form-control" id="skills">
+                              {% for c in compt %}
+
+                                <option>{{c}}</option>
+
+                             {% endfor %}
+                           </select>
+                             </div>
+                           </div>
+                            <label for="skills" class="col-sm-1 col-form-label">Note</label>
+                          <div class="form-group col-md-3">
+                             <div class="input-group" >
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="far fa-sticky-note"></i>
+                                </span>
+                              </div>
+                            <select name="note[]" id="inputState" class="form-control">
+                                <option selected>------</option>
+                                <option>1/5</option>
+                                <option>2/5</option>
+                                <option>3/5</option>
+                                <option>4/5</option>
+                                <option>5/5</option>
+                            </select>
+                             </div>
+                          </div>
+
+                          <div class="form-group col-md-1 " id="add-input">
+                               <i class="fas fa-plus form-control"  id="addField"></i>
+
+                          </div>
+                        </div>
+                        </div>
+                      </div>
+                      <div class="form-group row">
+                        <label for="inputAssociative" class="col-sm-2 col-form-label">Vie associative</label>
+                        <div class="col-sm-10">
+                          <div class="input-group" >
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">
+                                    <i class="fas fa-project-diagram"></i>
+                                </span>
+                              </div>
+                          <input type="text" name="vie_associative" class="form-control" id="inputAssociative" placeholder="Vie associative">
+                          </div>
+                          </div>
+                      </div>
+                     <div class="form-group row">
+                        <div class="offset-sm-2 col-sm-10">
+                          <button type="button" id="previous-btn" class="btn btn-danger ">Previous</button>
+                          <button type="submit" id="submit-btn" class="btn btn-danger ">Submit</button>
+
+                        </div>
+                      </div>
+                   </div>
+
+                    </form>
+                  </div>
+                  <!-- /.tab-pane -->
+                </div>
+                <!-- /.tab-content -->
+              </div><!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
+      </div><!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+  <!-- jQuery -->
+  <script src="/static/assets/plugins/jquery/jquery.min.js"></script>
+  <!-- Bootstrap 4 -->
+  <script src="/static/assets/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="/static/assets/plugins/bootstrap/bootstrap-datepicker.min.js"></script>
+<script src="/static/assets/plugins/bootstrap/bootstrap-datepicker.fr.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="/static/assets/js/adminlte.min.js"></script>
+  <!-- AdminLTE for demo purposes -->
+  <script src="/static/assets/js/demo.js"></script>
+  <script src="/static/assets/js/multiform.js"></script>
+<script src="/static/assets/js/yearpicker.js"></script>
+
+
+ <script>
+
+$(document).ready(function(){
+
+ var cmpt_nts ='{{ cmptNote }}';
+ cmpt_nts=Array(cmpt_nts.replaceAll("&#39;","'"));
+
+cmpt_nts.forEach(function(cmpt_nt,index)
+    {
+    console.log(cmpt_nt);
+
+        $(".cmptDiv").append("<li class='list-group-item'><b>cmpt_nt.cmpt</b><a class='float-right'>");
+            for(i in 0..cmpt_nt.note)
+            {
+                    $(".cmptDiv").append("<i class='fas fa-star bg-primary'></i>");
+
+            }
+            for(let j=cmpt_nt['note'];j<5;j++)
+            {
+                     $(".cmptDiv").append("<i class='fas fa-star'></i>");
+
+            }
+        $(".cmptDiv").append("</a></li>");
+    });
+
+
+
+$("i#addField").click(function(){
+   $("#allskill").append($("<div class='form-group row'> <div class='col-sm-12'><div class='row'><div class='col-sm-7'><select type='text' name='competences[]' class='form-control' id='skills'>{% for c in compt %}<option>{{c}}</option>{% endfor %}</select></div><label for='skills' class='col-sm-1 col-form-label'>Note</label><div class='form-group col-md-3'><select name='note[]' id='inputState' class='form-control'><option selected>------</option><option>1/5</option><option>2/5</option><option>3/5</option><option>4/5</option><option>5/5</option></select></div><div class='form-group col-md-1' id='add-input'><i class='fas fa-minus form-control'  id='removeField'></i></div></div></div></div>"));
+});
+
+$("#allskill").on('click','#removeField',function(){
+        $(this).closest("div.row").remove();
+});
+
+$("i#addFieldexp").click(function(){
+  $("#allexp").append($("<div class='form-group row'><div class='col-sm-12' id='allexp'><div class='row'><div class='col-sm-5'><input type='text' name='poste[]' placeholder='Poste'  class='form-control' id='poste'></div><label for='deDate'  class='col-sm-1 col-form-label'>De</label><div class='form-group col-md-2' ><input type='text' name='datede[]' placeholder='Date'  class='form-control yearpicker1' id='deDate'></div><label for='aDate'  class='col-sm-1 col-form-label'>A</label><div class='form-group col-md-2' ><input type='text' name='adate[]' placeholder='Date'  class='form-control yearpicker' id='aDate'></div><div class='form-group col-md-1' ><i class='fas fa-minus form-control' id='removeFieldexp' ></i></div></div></div></div>"));
+});
+$("#allexp").on('click','#removeFieldexp',function(){
+        $(this).closest("div.row").remove();
+});
+
+
+ $(".yearpicker1").yearpicker({
+    endYear:new Date().getFullYear()-1
+ });
+ $(".yearpicker").yearpicker({
+    endYear:new Date().getFullYear()
+ });
+  $(".datepicker").datepicker({
+   format:'yyyy-mm-dd',
+   language:'fr'
+ });
+
+
+
+});
+
+
+ </script>
+{% endblock javascripts %}  

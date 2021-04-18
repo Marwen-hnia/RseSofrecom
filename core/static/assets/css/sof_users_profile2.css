@@ -1,0 +1,48 @@
+
+.step {
+  display: none;
+}
+.step.active {
+  display: block;
+}
+#add-input{
+text-align:center;
+}
+#input-exp{
+text-align:center;
+}
+#addField{
+background-color:#2EB25A;
+font-size:20px;
+color:white;
+}
+#addFieldexp{
+background-color:#2EB25A;
+font-size:20px;
+color:white;
+}
+#add-input i#removeField{
+background-color:red;
+color:white;
+font-size:20px;
+}
+i#removeFieldexp{
+background-color:red;
+color:white;
+font-size:20px;
+}
+
+#submit-btn{
+position:absolute;
+right:0;
+background-color:#EC4146;
+border:none;
+}
+#previous-btn{
+background-color:#89CEF4;
+border:none;
+}
+#next-btn{
+background-color:#89CEF4;
+border:none;
+}
